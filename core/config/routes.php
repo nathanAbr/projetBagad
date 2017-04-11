@@ -6,7 +6,10 @@ if(empty($_GET)){
 }
 elseif(!empty($_GET)) {
     $class = '\application\controller\\'.$_GET['pages'];
+<<<<<<< HEAD
     
+=======
+>>>>>>> master
     $page = new $class();
     if(isset($_GET['module'])){
         $module = $_GET['module'];

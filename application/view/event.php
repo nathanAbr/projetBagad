@@ -1,1 +1,13 @@
+<<<<<<< HEAD
 </h1><?php echo $title; ?></h1>
+=======
+<?php
+foreach($event as $item){ ?>
+    <div class="event">
+        <h1><?php echo $item['nom']; ?></h1>
+        <p>
+            <?php echo $item['description']; ?>
+        </p>
+    </div>
+<?php } ?>
+>>>>>>> master
