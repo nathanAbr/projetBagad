@@ -5,13 +5,8 @@ if(empty($_GET)){
     return $default;
 }
 elseif(!empty($_GET)) {
-    $class = $_GET['pages'];
-    if($page instanceof $class){
-
-    }
-    else{
-        $page = new $class;
-    }
+    $class = '\application\controller\\'.$_GET['pages'];
+    
     $page = new $class();
     if(isset($_GET['module'])){
         $module = $_GET['module'];
