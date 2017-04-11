@@ -20,14 +20,13 @@ class Database
     protected $_database;
     protected $_host;
 
-    protected $db;
+    public $db;
 
-    public function __construct()
+    private function __construct()
     {
         $valide = false;
-        fopen('application/config/db.cong', 'w+');
-        foreach(file('application/config/db.cong') as $config){
-            $key = explode(':', $config);
+        foreach(file('application/config/db.conf') as $config){
+            $key = explode(':', rtrim($config));
             if($key[0] == 'username'){
                 $this->_username = $key[1];
             }
@@ -43,10 +42,12 @@ class Database
             }
         }
         if($valide) {
-            $this->db = new PDO('mysql:host=' . $this->_host . ';dbname=' . $this->_database . ';charset=utf8', $this->_username, $this->_password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        }
-        else{
-            return 'Erreur, veuillez vérifier votre fichier db.conf';
+            try{
+                $this->db = new PDO('mysql:host=' . $this->_host . ';dbname=' . $this->_database . ';charset=utf8', $this->_username, $this->_password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            }
+            catch(\PDOException $e){
+                die($e->getMessage());
+            }
         }
     }
 
