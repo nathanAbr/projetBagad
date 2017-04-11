@@ -1,7 +1,36 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Nathan
- * Date: 11/04/2017
- * Time: 09:16
- */
+if(empty($_GET)){
+    $class = '\application\controller\\'.$config['default_controller'];
+    $default = new $class();
+    return $default;
+}
+elseif(!empty($_GET)) {
+    $class = $_GET['pages'];
+    if($page instanceof $class){
+
+    }
+    else{
+        $page = new $class;
+    }
+    $page = new $class();
+    if(isset($_GET['module'])){
+        $module = $_GET['module'];
+        foreach(get_class_methods($page) as $method){
+            if($module == $method){
+                if(isset($_GET['param'])){
+                    $param = $_GET['param'];
+                    return $page->$method($param);
+                    break;
+                }
+                else{
+                    return $page->$method();
+                    break;
+                }
+            }
+        }
+    }
+    else{
+        return $page;
+    }
+}
+?>
