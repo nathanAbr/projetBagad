@@ -14,6 +14,6 @@ class Model
     protected $db;
 
     public function __construct(){
-        $this->db = \core\database\Database::getInstance()->db;
+        $db = \core\database\Database::getInstance();
     }
 }
