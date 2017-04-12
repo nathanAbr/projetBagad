@@ -1,13 +1,24 @@
 <?php 
 namespace application\model;
 
-class Membre_Model Extends \core\model\Model { 
-    
-    
+class Membre Extends \core\model\Model {
+
+    public function getUser($login, $password){
+        $data = $this->db->query('SELECT m.idMembre, m.mail, m.nom, m.prenom, m.dateNaissance, m.telephone, m.login, m.motDePasse,
+										i.nom as "instrument", a.rue1 as "rue", l.ville , l.pays, l.codePostale, g.libelle 
+								FROM membre m 
+								INNER JOIN instrument i ON m.fk_instrument = i.idInstrument 
+								INNER JOIN adresse a ON m.fk_adresse = a.idAdresse 
+								INNER JOIN localite l ON a.fk_localite = l.idLocalite 
+								INNER JOIN groupe g ON m.fk_groupe = g.idGroupe WHERE login = "'.$login.'" AND motDePasse = "'.$password.'"');
+        $result = $data->fetchAll();
+        return $result;
+    }
+
     function loadMembre() { 
 	    $tableau = array();
 	    $i = 0;
-        $reponse = $bd->query('SELECT m.idMembre, m.mail, m.nom, m.prenom, m.dateNaissance, m.telephone, m.login, m.motDePasse,
+        $reponse = $this->bd->query('SELECT m.idMembre, m.mail, m.nom, m.prenom, m.dateNaissance, m.telephone, m.login, m.motDePasse,
 										i.nom as "instrument", a.rue1 as "rue", l.ville , l.pays, l.codePostale, g.libelle 
 								FROM membre m 
 								INNER JOIN instrument i ON m.fk_instrument = i.idInstrument 
@@ -22,7 +33,7 @@ class Membre_Model Extends \core\model\Model {
 	
 	function insertMembre($Membre) { 
         
-    $req = $bd->prepare('INSERT INTO membre(mail, nom, prenom, dateNaissance, telephone, login, motDePasse, fk_instrument, fk_adresse, fk_groupe)
+    $req = $this->bd->prepare('INSERT INTO membre(mail, nom, prenom, dateNaissance, telephone, login, motDePasse, fk_instrument, fk_adresse, fk_groupe)
 					      VALUES(:mail, :nom, :$donnees, :dateNaissance, :telephone, :login, :motDePasse, :fk_instrument ,:fk_adresse, :fk_groupe)');
 	$req->bindParam(':mail',$Membre['mail']);
 	$req->bindParam(':nom',$Membre['nom']);
@@ -35,30 +46,19 @@ class Membre_Model Extends \core\model\Model {
 	$req->bindParam(':fk_adresse',$Membre['fk_adresse']);
 	$req->bindParam(':fk_groupe',$Membre['fk_groupe']);
 	$req->execute();
-
-		if($req){
-			
-			echo 'Le jeu a bien été ajouté !';
-		}
     }
 	
 	function updateMembre($Membre) { 
 	
-		$req = $bd->prepare('UPDATE membre SET mail="'.$Membre['mail'].'", nom="'.$Membre['nom'].'", prenom="'.$Membre['prenom'].'", dateNaissance="'.$Membre['dateNaissance'].'"
+		$req = $this->bd->prepare('UPDATE membre SET mail="'.$Membre['mail'].'", nom="'.$Membre['nom'].'", prenom="'.$Membre['prenom'].'", dateNaissance="'.$Membre['dateNaissance'].'"
 							                       telephone="'.$Membre['telephone'].'",login="'.$Membre['login'].'",motDePasse="'.$Membre['mdp'].'",fk_instrument="'.$Membre['idInstrument'].'",
 												   fk_adresse="'.$Membre['adresse'].'",fk_groupe="'.$Membre['groupe'].'"
 							  WHERE id='.$Membre['id']);
 		$req->execute();
-		if($req){
-			echo 'Le jeu a bien été mis à jour !';
-		}
     } 
 	function deleteMembre() { 
-		$req = $bd->prepare('DELETE FROM membre WHERE nom ="'.$Membre['nom'].'" AND prenom = "'.$Membre['prenom'].'"');
+		$req = $this->bd->prepare('DELETE FROM membre WHERE nom ="'.$Membre['nom'].'" AND prenom = "'.$Membre['prenom'].'"');
 		$req->execute();
-		if($req){
-			echo 'Le jeu a bien été supprimé !';
-		}
     } 
 } 
 

@@ -10,6 +10,7 @@ namespace core\controller;
 
 class Controller
 {
+
     protected function loadView($file, $data = array(), $template=true){
         $content_file = 'application/view/'.$file.'.php';
         $myKey = array_keys($data);
