@@ -38,4 +38,8 @@ class Users extends \core\controller\Controller
             }
         }
     }
+
+    public function disconnect(){
+        session_destroy();
+    }
 }
