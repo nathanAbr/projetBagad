@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="application/assets/css/form.css" type="text/css" />
 </head>
 <body>
-<form method="post" action="http://localhost/projetbagad/index.php?pages=Users&module=login">
-<div class="login-form">
+<form method="post" action="http://bagad.local/projetBagad/index.php?pages=Users&module=login">
+<div class="login-form">  
     <h3 class="error"><?php if(isset($error_message)){echo $error_message;} ?></h3>
     <h1>Login</h1>
     <div class="form-group ">
