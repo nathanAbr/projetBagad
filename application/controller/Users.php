@@ -24,7 +24,7 @@ class Users extends \core\controller\Controller
         if(isset($_POST['login']) && isset($_POST['password'])) {
             $login = $_POST['login'];
             $password = md5($_POST['password']);
-            $user = new \application\model\Users();
+            $user = new \application\model\Membre();
             $session = $user->getUser($login, $password);
             $_SESSION['users'] = $session;
             if(!empty($_SESSION['users'])) {
