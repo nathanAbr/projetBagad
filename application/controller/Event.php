@@ -1,6 +1,5 @@
 <?php
 
-
 namespace application\controller;
 
 class Event extends \core\controller\Controller
@@ -8,9 +7,16 @@ class Event extends \core\controller\Controller
 	
 	public function show_event()
 	{
-		$event = new \application\model\Event();
-        $data['event'] = $event->getAllEvent();
-        $this->loadView('event', $data);
+	    session_start();
+		if(isset($_SESSION['users'])) {
+            $event = new \application\model\Event();
+            $data['event'] = $event->getAllEvent();
+            $this->loadView('event', $data);
+        }
+        else{
+            $data['error_message'] = 'Vous devez être connecté pour accèder à cette page';
+            $this->loadView('login', $data, false);
+        }
 	}
 
 	/*public function create_event()

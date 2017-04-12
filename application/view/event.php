@@ -1,4 +1,3 @@
-
 <section class="event-section">
 <?php foreach($event as $item){ ?>
         <div class="event">
