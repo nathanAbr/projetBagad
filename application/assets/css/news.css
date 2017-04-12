@@ -1,0 +1,32 @@
+.showNews-form{
+	margin-top: 15px;
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 25px;
+    width: 75%;
+    background-color: #F2F2F2;
+    border-radius: 10px;
+    text-align: justify;
+}
+.new-section{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.signature{
+	text-align: right;
+}
+.date{
+	flex-grow: 1;
+	margin-top: -25px;
+	text-align: right;
+}
+.titre{
+	flex-grow: 2;
+	text-align: center;
+}
+.entete{
+	display: flex;
+}

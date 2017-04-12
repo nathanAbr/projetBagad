@@ -7,8 +7,8 @@ class News extends \core\controller\Controller
 	
 	public function show_news()
 	{
-		$news = new \application\model\News();
-		$data['news'] = $news->getAllNews();
+		$news = new \application\model\ActualiteModel();
+		$data['news'] = $news->loadActu();
 		$this->loadView('news', $data);
 	}
 	/*function create_news()

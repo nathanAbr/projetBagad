@@ -1,16 +1,15 @@
 <?php 
 
 namespace application\model;
-class Actualite_Model Extends \core\model\Model { 
+class ActualiteModel Extends \core\model\Model { 
     
     
     function loadActu() { 
 	    $tableau = array();
-	    $i = 0;
-        $reponse = $this->bd->query('SELECT idActualite, titre, image, description, date, m.nom, m.prenom 
+        $reponse = $this->db->query('SELECT idActualite, titre, image, description, date, m.nom, m.prenom 
 								FROM actualite 
 								INNER JOIN membre m ON fk_membre = m.idMembre');
-
+        
 		$donnees = $reponse->fetchAll();
 		$reponse->closeCursor(); 
 		return $donnees ;
@@ -18,7 +17,7 @@ class Actualite_Model Extends \core\model\Model {
 	
 	function insertActu($Actualite) { 
        
-    $req = $this->bd->prepare('INSERT INTO actualite(titre, image, description, date, fk_membre) VALUES(:titre, :image, :description, :date, :idMembre)');
+    $req = $this->db->prepare('INSERT INTO actualite(titre, image, description, date, fk_membre) VALUES(:titre, :image, :description, :date, :idMembre)');
 	$req->bindParam(':titre',$Actualite['titre']);
 	$req->bindParam(':image',$Actualite['image']);
 	$req->bindParam(':description',$Actualite['description']);
@@ -34,7 +33,7 @@ class Actualite_Model Extends \core\model\Model {
 	
 	function updateActu($Actualite) { 
 	
-		$req = $this->bd->prepare('UPDATE actualite SET titre="'.$Actualite['titre'].'", image="'.$Actualite['image'].'",
+		$req = $this->db->prepare('UPDATE actualite SET titre="'.$Actualite['titre'].'", image="'.$Actualite['image'].'",
 										   description="'.$Actualite['description'].'", date="'.$Actualite['date'].'", fk_membre = "'.$Actualite['idMembre'].'"  
 							  WHERE idActualite='.$Actualite['id']);
 		$req->execute();
@@ -43,7 +42,7 @@ class Actualite_Model Extends \core\model\Model {
 		}
     } 
 	function deleteActu($Actualite) { 
-		$req = $this->bd->prepare('DELETE FROM actualite WHERE titre ="'.$Actualite['titre'].'"');
+		$req = $this->db->prepare('DELETE FROM actualite WHERE titre ="'.$Actualite['titre'].'"');
 		$req->execute();
 		if($req){
 			echo 'Le jeu a bien �t� supprim� !';
