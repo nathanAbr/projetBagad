@@ -8,10 +8,9 @@ class Event extends \core\controller\Controller
 	
 	public function show_event()
 	{
-		/*$event = new Event_model();
-		$data['event'] = $event->getAllEvent();*/
-		$data['title']='titre';
-		$this->loadView('event', $data);
+		$event = new \application\model\Event();
+        $data['event'] = $event->getAllEvent();
+        $this->loadView('event', $data);
 	}
 
 	/*public function create_event()
@@ -34,7 +33,5 @@ class Event extends \core\controller\Controller
 
 }
 
-
 ?>
-
 
