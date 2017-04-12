@@ -13,12 +13,13 @@ class Event extends \core\controller\Controller
         $this->loadView('event', $data);
 	}
 
-	/*public function create_event()
+	public function create_event()
 	{
-		$event->createEvent($data);
+		$event = new \application\model\NewEvent();
+		$data['event'] = $event->getNewEvent();
 		$this->loadView('new_event', $data);
 	}
-
+/*
 	public function update_event(id)
 	{
 		$data['event']='';
