@@ -5,6 +5,7 @@
  * Date: 11/04/2017
  * Time: 09:14
  */
+session_start();
 global $config;
 require_once("application/config/config.php");
 require_once("core/loader/SplClassLoader.php");

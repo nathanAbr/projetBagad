@@ -13,7 +13,6 @@ use \core\controller\Controller;
 class Accueil extends Controller
 {
     public function __construct(){
-        session_start();
         if(isset($_SESSION['users'])) {
             $data['title'] = 'Bienvenue sur notre gestionnaire d\'évènements';
             $data['logo'] = 'application/assets/logo/logo.png';

@@ -12,7 +12,6 @@ namespace application\controller;
 class Users extends \core\controller\Controller
 {
     public function __construct(){
-        session_start();
         if(!isset($_SESSION['users'])) {
             $this->loadView('login', array(), false);
         }
@@ -22,7 +21,6 @@ class Users extends \core\controller\Controller
     }
 
     public function login(){
-        session_start();
         if(isset($_POST['login']) && isset($_POST['password'])) {
             $login = $_POST['login'];
             $password = md5($_POST['password']);

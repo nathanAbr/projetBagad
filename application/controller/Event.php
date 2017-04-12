@@ -7,7 +7,6 @@ class Event extends \core\controller\Controller
 	
 	public function show_event()
 	{
-	    session_start();
 		if(isset($_SESSION['users'])) {
             $event = new \application\model\Event();
             $data['event'] = $event->getAllEvent();
