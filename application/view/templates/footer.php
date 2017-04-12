@@ -1,7 +1,5 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Nathan
- * Date: 11/04/2017
- * Time: 12:50
- */
+
+            <script type="text/javascript" src="application/assets/js/style.js"></script>
+        </main>
+    </body>
+</html>
