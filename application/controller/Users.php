@@ -16,7 +16,7 @@ class Users extends \core\controller\Controller
             $this->loadView('login', array(), false);
         }
         else{
-            header('Location: http://localhost/projetbagad/index.php?pages=Accueil');
+            header('Location: index.php?pages=Accueil');
         }
     }
 
@@ -28,7 +28,7 @@ class Users extends \core\controller\Controller
             $session = $user->getUser($login, $password);
             $_SESSION['users'] = $session;
             if(!empty($_SESSION['users'])) {
-                header('Location: http://localhost/projetbagad/index.php?pages=Accueil');
+                header('Location: index.php?pages=Accueil');
             }
             else{
                 $data['error_message'] = 'Une erreur est survenu, veuillez réessayer ultérieurement.';
