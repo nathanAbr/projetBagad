@@ -1,9 +1,8 @@
 <?php 
 
 namespace application\model;
-class Actualite_Model Extends \core\model\Model { 
-    
-    
+class Actualite Extends \core\model\Model {
+
     function loadActu() { 
 	    $tableau = array();
 	    $i = 0;
@@ -16,20 +15,14 @@ class Actualite_Model Extends \core\model\Model {
 		return $donnees ;
     } 
 	
-	function insertActu($Actualite) { 
-       
-    $req = $this->bd->prepare('INSERT INTO actualite(titre, image, description, date, fk_membre) VALUES(:titre, :image, :description, :date, :idMembre)');
-	$req->bindParam(':titre',$Actualite['titre']);
-	$req->bindParam(':image',$Actualite['image']);
-	$req->bindParam(':description',$Actualite['description']);
-	$req->bindParam(':date',$Actualite['date']);
-	$req->bindParam(':idMembre',$Actualite['idMembre']);
-	$req->execute();
-
-		if($req){
-			
-			echo 'Le jeu a bien �t� ajout� !';
-		}
+	function insertActu($Actualite) {
+        $req = $this->bd->prepare('INSERT INTO actualite(titre, image, description, date, fk_membre) VALUES(:titre, :image, :description, :date, :idMembre)');
+        $req->bindParam(':titre',$Actualite['titre']);
+        $req->bindParam(':image',$Actualite['image']);
+        $req->bindParam(':description',$Actualite['description']);
+        $req->bindParam(':date',$Actualite['date']);
+        $req->bindParam(':idMembre',$Actualite['idMembre']);
+        $req->execute();
     }
 	
 	function updateActu($Actualite) { 
@@ -38,16 +31,10 @@ class Actualite_Model Extends \core\model\Model {
 										   description="'.$Actualite['description'].'", date="'.$Actualite['date'].'", fk_membre = "'.$Actualite['idMembre'].'"  
 							  WHERE idActualite='.$Actualite['id']);
 		$req->execute();
-		if($req){
-			echo 'Le jeu a bien �t� ajout� !';
-		}
     } 
 	function deleteActu($Actualite) { 
 		$req = $this->bd->prepare('DELETE FROM actualite WHERE titre ="'.$Actualite['titre'].'"');
 		$req->execute();
-		if($req){
-			echo 'Le jeu a bien �t� supprim� !';
-		}
     } 
 } 
 

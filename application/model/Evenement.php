@@ -1,7 +1,7 @@
 <?php 
 namespace application\model;
 
-class Evenement_Model Extends \core\model\Model { 
+class Evenement Extends \core\model\Model {
     
     
     function loadEvent() { 
@@ -39,14 +39,7 @@ class Evenement_Model Extends \core\model\Model {
 	$req->bindParam(':idType',$event['fk_type']);
 	$req->bindParam(':idMembre',$event['fk_membre']);
 	$req->bindParam(':idReferent',$event['fk_referentExterieur']);
-	
-	
 	$req->execute();
-
-		if($req){
-			
-			echo 'Le jeu a bien �t� ajout� !';
-		}
     }
 	
 	function updateEvent($event) { 
@@ -55,16 +48,10 @@ class Evenement_Model Extends \core\model\Model {
 										   description="'.$event['description'].'", dateDebut="'.$event['dateDebut'].'", cachet="'.$event['cachet'].'"    
 							  WHERE idEvenement='.$event['idEvent']);
 		$req->execute();
-		if($req){
-			echo 'Le jeu a bien �t� mis � jour !';
-		}
     } 
 	function deleteActu() { 
 		$req = $this->bd->prepare('DELETE FROM evenement WHERE idEvenement ="'.$event['idEvent'].'"');
 		$req->execute();
-		if($req){
-			echo 'Le jeu a bien �t� supprim� !';
-		}
     } 
 } 
 
