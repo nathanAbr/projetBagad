@@ -37,8 +37,8 @@ h1{
     -webkit-border-radius:4px;
 }
 .form-control:focus, .form-control:focus + .fa{
-    border-color:#10CE88;
-    color:#10CE88;
+    border-color:#ed1c24;
+    color:#ed1c24;
 }
 .form-group .fa{
     position: absolute;

@@ -1,0 +1,5 @@
+Options +FollowSymlinks
+RewriteEngine On
+RewriteRule	^pizzeriaV1\.1/index.php\/(.*)$ pizzeriaV1.1/index.php?pages=$1 [L]
+RewriteRule	^pizzeriaV1\.1/index.php\/(.*)\/(.*)$ pizzeriaV1.1/index.php?pages=$1&module=$2 [L]
+RewriteRule	^pizzeriaV1\.1/index.php\/(.*)\/(.*)\/(.*)$ pizzeriaV1.1/index.php?pages=$1&module=$2&param=$3 [L]
