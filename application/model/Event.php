@@ -15,3 +15,4 @@ class Event extends \core\model\Model
         return $result;
     }
 }
+?>
