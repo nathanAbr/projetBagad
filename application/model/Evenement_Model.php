@@ -7,7 +7,7 @@ class Evenement_Model Extends \core\model\Model {
     function loadEvent() { 
 	    $tableau = array();
 	    $i = 0;
-        $reponse = $bd->query('SELECT e.idEvenement, e.nom as "eventNom", e.dateDebut, e.dateFin, e.cachet, e.description,
+        $reponse = $this->bd->query('SELECT e.idEvenement, e.nom as "eventNom", e.dateDebut, e.dateFin, e.cachet, e.description,
 										e.image, e.valider, a.rue1, a.rue2, a.complement, l.ville, l.pays, l.codePostale, 
 										t.libelle as "typeEvenement", m.nom as "createurNom" ,m.prenom as "createurPrenom", 
 										r.nom as "referentNom", r.prenom as "referentPrenom", r.telephone as "referentTel", 
@@ -26,7 +26,7 @@ class Evenement_Model Extends \core\model\Model {
 	
 	function insertEvent($event) { 
         
-    $req = $bd->prepare('INSERT INTO evenement(nom, dateDebut, dateFin, cachet, description,image,valider,fk_adresse,fk_type,fk_membre,fk_referentExterieur) 
+    $req = $this->bd->prepare('INSERT INTO evenement(nom, dateDebut, dateFin, cachet, description,image,valider,fk_adresse,fk_type,fk_membre,fk_referentExterieur) 
 				         VALUES(:nom,:dateDebut,:dateFin,:cachet, :description, :image, :valider, :idAdresse, :idType, :idMembre, :idReferent)');
 	$req->bindParam(':eventNom',$event['nom']);
 	$req->bindParam(':dateDebut',$event['dateDebut']);
@@ -45,25 +45,25 @@ class Evenement_Model Extends \core\model\Model {
 
 		if($req){
 			
-			echo 'Le jeu a bien été ajouté !';
+			echo 'Le jeu a bien ï¿½tï¿½ ajoutï¿½ !';
 		}
     }
 	
 	function updateEvent($event) { 
 	
-		$req = $bd->prepare('UPDATE evenement SET nom="'.$event['nom'].'", image="'.$event['image'].'", dateFin= "'.$event['dateFin'].'", valider= "'.$event['valider'].'",
+		$req = $this->bd->prepare('UPDATE evenement SET nom="'.$event['nom'].'", image="'.$event['image'].'", dateFin= "'.$event['dateFin'].'", valider= "'.$event['valider'].'",
 										   description="'.$event['description'].'", dateDebut="'.$event['dateDebut'].'", cachet="'.$event['cachet'].'"    
 							  WHERE idEvenement='.$event['idEvent']);
 		$req->execute();
 		if($req){
-			echo 'Le jeu a bien été mis à jour !';
+			echo 'Le jeu a bien ï¿½tï¿½ mis ï¿½ jour !';
 		}
     } 
 	function deleteActu() { 
-		$req = $bd->prepare('DELETE FROM evenement WHERE idEvenement ="'.$event['idEvent'].'"');
+		$req = $this->bd->prepare('DELETE FROM evenement WHERE idEvenement ="'.$event['idEvent'].'"');
 		$req->execute();
 		if($req){
-			echo 'Le jeu a bien été supprimé !';
+			echo 'Le jeu a bien ï¿½tï¿½ supprimï¿½ !';
 		}
     } 
 } 

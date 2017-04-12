@@ -7,7 +7,7 @@ class Actualite_Model Extends \core\model\Model {
     function loadActu() { 
 	    $tableau = array();
 	    $i = 0;
-        $reponse = $bd->query('SELECT idActualite, titre, image, description, date, m.nom, m.prenom 
+        $reponse = $this->bd->query('SELECT idActualite, titre, image, description, date, m.nom, m.prenom 
 								FROM actualite 
 								INNER JOIN membre m ON fk_membre = m.idMembre');
 
@@ -18,7 +18,7 @@ class Actualite_Model Extends \core\model\Model {
 	
 	function insertActu($Actualite) { 
        
-    $req = $bd->prepare('INSERT INTO actualite(titre, image, description, date, fk_membre) VALUES(:titre, :image, :description, :date, :idMembre)');
+    $req = $this->bd->prepare('INSERT INTO actualite(titre, image, description, date, fk_membre) VALUES(:titre, :image, :description, :date, :idMembre)');
 	$req->bindParam(':titre',$Actualite['titre']);
 	$req->bindParam(':image',$Actualite['image']);
 	$req->bindParam(':description',$Actualite['description']);
@@ -28,25 +28,25 @@ class Actualite_Model Extends \core\model\Model {
 
 		if($req){
 			
-			echo 'Le jeu a bien été ajouté !';
+			echo 'Le jeu a bien ï¿½tï¿½ ajoutï¿½ !';
 		}
     }
 	
 	function updateActu($Actualite) { 
 	
-		$req = $bd->prepare('UPDATE actualite SET titre="'.$Actualite['titre'].'", image="'.$Actualite['image'].'",
+		$req = $this->bd->prepare('UPDATE actualite SET titre="'.$Actualite['titre'].'", image="'.$Actualite['image'].'",
 										   description="'.$Actualite['description'].'", date="'.$Actualite['date'].'", fk_membre = "'.$Actualite['idMembre'].'"  
 							  WHERE idActualite='.$Actualite['id']);
 		$req->execute();
 		if($req){
-			echo 'Le jeu a bien été ajouté !';
+			echo 'Le jeu a bien ï¿½tï¿½ ajoutï¿½ !';
 		}
     } 
 	function deleteActu($Actualite) { 
-		$req = $bd->prepare('DELETE FROM actualite WHERE titre ="'.$Actualite['titre'].'"');
+		$req = $this->bd->prepare('DELETE FROM actualite WHERE titre ="'.$Actualite['titre'].'"');
 		$req->execute();
 		if($req){
-			echo 'Le jeu a bien été supprimé !';
+			echo 'Le jeu a bien ï¿½tï¿½ supprimï¿½ !';
 		}
     } 
 } 
