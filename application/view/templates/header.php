@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="application/assets/css/style.css" type="text/css" />
+        <link rel="stylesheet" href="application/assets/css/form.css" type="text/css" />
     </head>
     <body>
         <nav class="nav">
