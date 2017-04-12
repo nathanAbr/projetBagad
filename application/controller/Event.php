@@ -8,8 +8,8 @@ class Event extends \core\controller\Controller
 	
 	public function show_event()
 	{
-		$event = new \application\model\Event();
-        $data['event'] = $event->getAllEvent();
+		$event = new \application\model\Evenement_Model();
+        $data['event'] = $event->loadEvent()();
         $this->loadView('event', $data);
 	}
 
