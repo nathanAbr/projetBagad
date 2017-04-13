@@ -19,6 +19,7 @@ class News extends \core\controller\Controller
 	function create_news()
 	{
 		$news = new \application\model\ActualiteModel();
+        $data = array();
 		if(isset($_POST['valid'])){
 			if(empty($_POST['titre']) || empty($_POST['description'])){
 				$data['error_message'] = 'L\' un des champs n\'a pas été renseigné';
@@ -44,6 +45,7 @@ class News extends \core\controller\Controller
 	{
 		# code...
 	}
+
 	function delete_news(){
 		# code...
 	}*/
