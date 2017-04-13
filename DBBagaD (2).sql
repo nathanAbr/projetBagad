@@ -287,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `DBBagaD`.`Actualite` (
   `titre` VARCHAR(45) NOT NULL,
   `image` VARCHAR(255) NULL,
   `description` MEDIUMTEXT NOT NULL,
-  `date` DATETIME NOT NULL,
+  `date` DATETIME NOT NULL DEFAULT ,
   `fk_membre` INT NOT NULL,
   PRIMARY KEY (`idActualite`),
   INDEX `fk_membre_idx` (`fk_membre` ASC),
