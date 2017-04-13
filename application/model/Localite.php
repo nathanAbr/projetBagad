@@ -7,7 +7,7 @@ class Localite Extends \core\model\Model {
     function loadLocalite() {
 	    $tableau = array();
 	    $i = 0;
-        $reponse = $this->bd->query('SELECT idLocalite, ville, pays, codePostale
+        $reponse = $this->db->query('SELECT idLocalite, ville, pays, codePostale
 						       FROM localite');
 
 		$donnees = $reponse->fetchAll();
@@ -16,23 +16,36 @@ class Localite Extends \core\model\Model {
     }
 
     function insertLocalite($Localite) {
-
-        $req = $this->bd->prepare('INSERT INTO localite(ville, pays, codePostale)
+        $localites = $this->loadLocalite();
+        $valide = true;
+        foreach ($localites as $localite){
+            if($localite['pays'] == $Localite->pays && $localite['ville'] == $Localite->ville && $localite['codePostale'] == $Localite->codepostale){
+                $result[0][0] = $localite['idLocalite'];
+                $valide = false;
+                break;
+            }
+        }
+        if($valide){
+            $req = $this->db->prepare('INSERT INTO localite(ville, pays, codePostale)
 					         VALUES(:ville, :pays, :codePostale)');
-        $req->bindParam(':ville',$Localite['ville']);
-        $req->bindParam(':pays',$Localite['pays']);
-        $req->bindParam(':codePostale',$Localite['cp']);
-        $req->execute();
+            $req->bindParam(':ville',$Localite->ville);
+            $req->bindParam(':pays',$Localite->pays);
+            $req->bindParam(':codePostale',$Localite->codepostale);
+            $req->execute();
+            $req = $this->db->query('SELECT LAST_INSERT_ID() FROM localite');
+            $result = $req->fetchAll();
+        }
+        return $result;
     }
 
     function updateLocalite($Localite) {
 
-        $req = $this->bd->prepare('UPDATE localite SET ville="'.$Localite['ville'].'", pays="'.$Localite['pays'].'", codePostale="'.$Localite['cp'].'"
+        $req = $this->db->prepare('UPDATE localite SET ville="'.$Localite['ville'].'", pays="'.$Localite['pays'].'", codePostale="'.$Localite['cp'].'"
 							  WHERE idLocalite="'.$Localite['id'].'"');
         $req->execute();
     }
     function deleteLocalite($Localite) {
-        $req = $this->bd->prepare('DELETE FROM localite WHERE idLocalite ="'.$Localite['id'].'"');
+        $req = $this->db->prepare('DELETE FROM localite WHERE idLocalite ="'.$Localite['id'].'"');
         $req->execute();
     }
 } 
