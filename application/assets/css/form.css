@@ -4,7 +4,7 @@
     -webkit-box-sizing:border-box;
     font-family:arial;
 }
-body{background:url("http://www.galaxiastudio.com/wp-content/uploads/2014/03/2252.jpg")#FF9000}
+body{background:url("../img/fond/2252.jpg")#FF9000}
 h1{
     color:#AAA173;
     text-align:center;
@@ -193,9 +193,25 @@ h1{
     text-decoration:underline;
     color:#8C918F;
 }
+
 .alert{
     display:none;
     font-size:12px;
     color:#f00;
     float:left;
+}
+
+.btn{
+    width: 10em;
+    float: right;
+}
+
+.groupe_role{
+    margin-top: 20px;
+}
+
+
+.role{
+    display: flex;
+    padding: 10px;
 }
