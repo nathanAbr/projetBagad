@@ -13,15 +13,19 @@
 				<?php if(isset($error_message)){echo $error_message;} ?>
 			</h3>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="titre" id="titre" name="titre">
+				<input type="text" class="form-control" placeholder="titre" 
+				value="<?php if(isset($news[0]['titre'])){echo $news[0]['titre'];} ?>" 
+				id="titre" name="titre">
 				<i class="fa fa-user"></i>
 			</div>
 			<div>
 				<p>Choisir une Image</p>
-				<input type="file" accept="image/*"  value="Image" id="image" name="image">
+				<input type="file" accept="image/*" 
+				value="<?php if(isset($news[0]['image'])){echo $news[0]['image'];} ?>"  
+				id="image" name="image">
 			</div>
 			<div class="form-descrip">
-				<textarea class="form-descrip" type="text" class="form-control"  id="description" name="description">Description</textarea>
+				<textarea class="form-descrip" type="text" class="form-control" placeholder="description" id="description" name="description"><?php if(isset($news[0]['description'])){echo $news[0]['description'];} ?></textarea>
 			</div>
 			<div class="valCan-btn">
 				<button class="valid-btn" name="valid">Valider</button>  

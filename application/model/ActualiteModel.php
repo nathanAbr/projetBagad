@@ -48,6 +48,18 @@ class ActualiteModel Extends \core\model\Model {
 			echo 'Le jeu a bien �t� supprim� !';
 		}
     } 
+
+    function getOnceActu($id){
+    	$reponse = $this->db->query('SELECT idActualite, titre, image, description, date 
+								FROM actualite 
+								
+								WHERE idActualite = '.$id);
+
+        
+		$donnees = $reponse->fetchAll();
+		$reponse->closeCursor(); 
+		return $donnees ;
+    }
 } 
 
 

@@ -24,7 +24,7 @@
 			<p class="description">
 				<?php echo $item['description']; ?>
 			</p>
-			<button class="modif-btn" onclick="location.href='index.php?pages=News&module=updateForm';" name="modif-btn">Modifier</button>
+			<button class="modif-btn" onclick="location.href='index.php?pages=News&module=showForm&param=<?php echo $item['idActualite']; ?>';" name="modif-btn">Modifier</button>
 			<div class="signature">
 				<?php echo $item['prenom'].' '.$item['nom']; ?>
 			</div>
