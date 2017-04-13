@@ -11,7 +11,7 @@ namespace application\controller;
 
 class Users extends \core\controller\Controller
 {
-    public function __construct(){
+    public function showLoginForm(){
         if(!isset($_SESSION['users'])) {
             $this->loadView('login', array(), false);
         }
@@ -25,9 +25,8 @@ class Users extends \core\controller\Controller
             $login = $_POST['login'];
             $password = md5($_POST['password']);
             $user = new \application\model\Membre();
-            $session = $user->getUser($login, $password);
-            $_SESSION['users'] = $session;
-            if(!empty($_SESSION['users'])) {
+            if(!empty($session = $user->getUser($login, $password))){
+                $_SESSION['users'] = $session;
                 header('Location: index.php?pages=Accueil');
             }
             else{
@@ -39,5 +38,6 @@ class Users extends \core\controller\Controller
 
     public function disconnect(){
         session_destroy();
+        $this->showLoginForm();
     }
 }
