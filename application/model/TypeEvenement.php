@@ -6,9 +6,7 @@ class TypeEvenement Extends \core\model\Model{
     
     function loadType() {
 	    $tableau = array();
-	    $i = 0;
-        $reponse = $this->bd->query('SELECT idType, libelle
-						FROM typeevenement');
+        $reponse = $this->db->query('SELECT idType, libelle FROM typeevenement');
 
         $donnees = $reponse->fetchAll();
         $reponse->closeCursor();
@@ -17,7 +15,7 @@ class TypeEvenement Extends \core\model\Model{
 	
 	function inserType($Type) {
 		
-        $req =$this->bd->prepare('INSERT INTO typeevenement(libelle)
+        $req =$this->db->prepare('INSERT INTO typeevenement(libelle)
 					        VALUES(:libelle)');
         $req->bindParam(':libelle',$Type['libelle']);
         $req->execute();
@@ -25,7 +23,7 @@ class TypeEvenement Extends \core\model\Model{
 	
 	function updateType($Type) {
 
-        $req = $this->bd->prepare('UPDATE typeevenement SET libelle="'.$Type['type'].'"
+        $req = $this->db->prepare('UPDATE typeevenement SET libelle="'.$Type['type'].'"
 							  WHERE idType='.$Type['Type']);
         $req->execute();
     } 

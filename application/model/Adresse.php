@@ -7,7 +7,7 @@ class Adresse Extends \core\model\Model {
     function loadAdresse() {
         $tableau = array();
         $i = 0;
-        $reponse = $this->bd->query('SELECT idAdresse, rue1, rue2, complement, l.ville, l.pays, l.codePostale
+        $reponse = $this->db->query('SELECT idAdresse, rue1, rue2, complement, l.ville, l.pays, l.codePostale
 						        FROM adresse 
 						        INNER JOIN localite l ON fk_localite = l.idLocalite');
 
@@ -18,23 +18,26 @@ class Adresse Extends \core\model\Model {
 
     function insertAdresse($Adresse) {
 
-        $req = $this->bd->prepare('INSERT INTO adresse(rue1, rue2, complement, fk_localite)
-					          VALUES(:rue1, :rue1, :complement, :fk_localite)');
-        $req->bindParam(':rue1',$Adresse['rue1']);
-        $req->bindParam(':rue1',$Adresse['rue2']);
-        $req->bindParam(':complement',$Adresse['complement']);
-        $req->bindParam(':complement',$Adresse['idLocalite']);
+        $req = $this->db->prepare('INSERT INTO adresse(rue1, rue2, complement, fk_localite)
+					          VALUES(:rue1, :rue2, :complement, :fk_localite) ');
+        $req->bindParam(':rue1',$Adresse->rue1);
+        $req->bindParam(':rue2',$Adresse->rue2);
+        $req->bindParam(':complement',$Adresse->complement);
+        $req->bindParam(':fk_localite',$Adresse->localite[0][0]);
         $req->execute();
+        $req = $this->db->query('SELECT LAST_INSERT_ID() FROM adresse');
+		$req = $req->fetchAll();
+        return $req;
     }
 
     function updateAdresse($Adresse) {
 
-        $req = $this->bd->prepare('UPDATE adresse SET rue1="'.$Adresse['rue1'].'", rue2="'.$Adresse['rue2'].'", complement="'.$Adresse['complement'].'", fk_localite="'.$Adresse['idLocalite'].'"
+        $req = $this->db->prepare('UPDATE adresse SET rue1="'.$Adresse['rue1'].'", rue2="'.$Adresse['rue2'].'", complement="'.$Adresse['complement'].'", fk_localite="'.$Adresse['idLocalite'].'"
 							  WHERE idAdresse="'.$Adresse['id'].'"');
         $req->execute();
     }
     function deleteAdresse($Adresse) {
-        $req = $this->bd->prepare('DELETE FROM adresse WHERE idAdresse ="'.$Adresse['id'].'"');
+        $req = $this->db->prepare('DELETE FROM adresse WHERE idAdresse ="'.$Adresse['id'].'"');
         $req->execute();
     }
 }

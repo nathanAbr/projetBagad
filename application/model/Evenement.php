@@ -28,29 +28,29 @@ class Evenement Extends \core\model\Model {
         
     $req = $this->db->prepare('INSERT INTO evenement(nom, dateDebut, dateFin, cachet, description,image,valider,fk_adresse,fk_type,fk_membre,fk_referentExterieur) 
 				         VALUES(:nom,:dateDebut,:dateFin,:cachet, :description, :image, :valider, :idAdresse, :idType, :idMembre, :idReferent)');
-	$req->bindParam(':eventNom',$event['nom']);
-	$req->bindParam(':dateDebut',$event['dateDebut']);
-	$req->bindParam(':dateFin',$event['dateFin']);
-	$req->bindParam(':cachet',$event['cachet']);
-	$req->bindParam(':description',$event['description']);
-	$req->bindParam(':image',$event['image']);
-	$req->bindParam(':valider',$event['valider']);
-	$req->bindParam(':idAdresse',$event['fk_adresse']);
-	$req->bindParam(':idType',$event['fk_type']);
-	$req->bindParam(':idMembre',$event['fk_membre']);
-	$req->bindParam(':idReferent',$event['fk_referentExterieur']);
+	$req->bindParam(':nom',$event->nom);
+	$req->bindParam(':dateDebut',$event->dateDebut);
+	$req->bindParam(':dateFin',$event->dateFin);
+	$req->bindParam(':cachet',$event->cachet);
+	$req->bindParam(':description',$event->description);
+	$req->bindParam(':image',$event->image);
+	$req->bindParam(':valider',$event->valide);
+	$req->bindParam(':idAdresse',$event->idAdresse[0][0]);       
+	$req->bindParam(':idType',$event->idType);
+	$req->bindParam(':idMembre',$event->idCreateur);
+	$req->bindParam(':idReferent',$event->idReferent[0][0]);
 	$req->execute();
     }
 	
 	function updateEvent($event) { 
 	
-		$req = $this->db->prepare('UPDATE evenement SET nom="'.$event['nom'].'", image="'.$event['image'].'", dateFin= "'.$event['dateFin'].'", valider= "'.$event['valider'].'",
-										   description="'.$event['description'].'", dateDebut="'.$event['dateDebut'].'", cachet="'.$event['cachet'].'"    
-							  WHERE idEvenement='.$event['idEvent']);
+		$req = $this->db->prepare('UPDATE evenement SET nom="'.$event->nom.'", image="'.$event->image.'", dateFin= "'.$event->dateFin.'", valider= "'.$event->valider.'",
+										   description="'.$event->description.'", dateDebut="'.$event->dateDebut.'", cachet="'.$event->cachet.'"    
+							  WHERE idEvenement='.$event->idEvent);
 		$req->execute();
     } 
-	function deleteActu() { 
-		$req = $this->db->prepare('DELETE FROM evenement WHERE idEvenement ="'.$event['idEvent'].'"');
+	function deleteEvent($event) { 
+		$req = $this->db->prepare('DELETE FROM evenement WHERE idEvenement ="'.$event->idEvent.'"');
 		$req->execute();
     } 
 } 

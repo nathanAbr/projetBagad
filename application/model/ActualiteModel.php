@@ -18,16 +18,16 @@ class ActualiteModel Extends \core\model\Model {
 	function insertActu($Actualite) { 
        
     $req = $this->db->prepare('INSERT INTO actualite(titre, image, description, date, fk_membre) VALUES(:titre, :image, :description, :date, :idMembre)');
-	$req->bindParam(':titre',$Actualite['titre']);
-	$req->bindParam(':image',$Actualite['image']);
-	$req->bindParam(':description',$Actualite['description']);
-	$req->bindParam(':date',$Actualite['date']);
-	$req->bindParam(':idMembre',$Actualite['idMembre']);
+	$req->bindParam(':titre',$Actualite->titre);
+	$req->bindParam(':image',$Actualite->image);
+	$req->bindParam(':description',$Actualite->description);
+	$req->bindParam(':date',$Actualite->date);
+	$req->bindParam(':idMembre',$Actualite->idMembre);
 	$req->execute();
 
 		if($req){
 			
-			echo 'Le jeu a bien �t� ajout� !';
+			echo 'Le jeu a bien ete ajoute !';
 		}
     }
 	
