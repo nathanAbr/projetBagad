@@ -5,8 +5,9 @@ namespace application\controller;
 class News extends \core\controller\Controller
 {
 	
-	public function show_news()
+	public function show_news($message = null)
 	{
+		$data['message'] = $message;
 		$news = new \application\model\ActualiteModel();
 		$data['news'] = $news->loadActu();
 		$this->loadView('news', $data);
@@ -48,13 +49,13 @@ class News extends \core\controller\Controller
 		
 	}
 
-	function showUpdate(){
+	function showUpdate($id){
 		$news = new \application\model\ActualiteModel();
-		$data['news'] = $news->loadActu();
-		$this->loadView('addNews', $data);
+		$data['news'] = $news->getOnceActu($id);
+		$this->loadView('modifNews', $data);
 	}
 
-	function update_news()
+	function update_news($id)
 	{
 		$news = new \application\model\ActualiteModel();
 		if(isset($_POST['valid'])){
@@ -63,24 +64,32 @@ class News extends \core\controller\Controller
 			}
 			else{
 				$Actualite = new \stdClass();
+				$Actualite->id = $id;
 				$Actualite->titre = $_POST['titre'];
 				$Actualite->image = $_POST['image'];
 				$Actualite->description = $_POST['description'];
 				$Actualite->date = date('Y-m-d h:i:s');
 				$Actualite->idMembre = $_SESSION['users'][0]['idMembre'];
-				$news->insertActu($Actualite);
+				$news->updateActu($Actualite);
 			}
-			$this->loadView('addNews', $data);
+			$this->show_news();
 		}
 		if(isset($_POST['cancel'])){
 			header('Location: index.php?pages=News&module=show_news');
 		}
 	}
 
-	/*function delete_news(){
+	function delete_news($id){
 
-		# code...
-	}*/
+		$news = new \application\model\ActualiteModel();
+		if($news->deleteActu($id)){
+			$message = 'actualite supprimer';
+		}
+		else{
+			$message = 'Une erreur c\'est produite';
+		}
+		$this->show_news($message);
+	}
 	
 
 }
