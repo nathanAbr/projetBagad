@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="application/assets/css/form.css" type="text/css" />
 </head>
 <body>
-	<form method="post" action="index.php?pages=News&module=create_news">
+	<form method="post" action="index.php?pages=News&module=update_news&param=<?php echo $news[0]['idActualite']; ?>">
 		<div class="login-form">	
 			
 			<h1>Creation d'une actualité</h1>

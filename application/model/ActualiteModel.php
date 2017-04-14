@@ -33,21 +33,29 @@ class ActualiteModel Extends \core\model\Model {
 	
 	function updateActu($Actualite) { 
 	
-		$req = $this->db->prepare('UPDATE actualite SET titre="'.$Actualite['titre'].'", image="'.$Actualite['image'].'",
-										   description="'.$Actualite['description'].'", date="'.$Actualite['date'].'", fk_membre = "'.$Actualite['idMembre'].'"  
-							  WHERE idActualite='.$Actualite['id']);
+		$req = $this->db->prepare('UPDATE actualite SET titre="'.$Actualite->titre.'", image="'.$Actualite->image.'",
+										   description="'.$Actualite->description.'", date="'.$Actualite->date.'", fk_membre = "'.$Actualite->idMembre.'"  
+							  WHERE idActualite='.$Actualite->id);
 		$req->execute();
-		if($req){
-			echo 'Le jeu a bien �t� ajout� !';
-		}
+		
     } 
-	function deleteActu($Actualite) { 
-		$req = $this->db->prepare('DELETE FROM actualite WHERE titre ="'.$Actualite['titre'].'"');
+	function deleteActu($id) { 
+		$req = $this->db->prepare('DELETE FROM actualite WHERE idActualite ='.$id);
 		$req->execute();
-		if($req){
-			echo 'Le jeu a bien �t� supprim� !';
-		}
+		
     } 
+
+    function getOnceActu($id){
+    	$reponse = $this->db->query('SELECT idActualite, titre, image, description, date 
+								FROM actualite 
+								
+								WHERE idActualite = '.$id);
+
+        
+		$donnees = $reponse->fetchAll();
+		$reponse->closeCursor(); 
+		return $donnees ;
+    }
 } 
 
 

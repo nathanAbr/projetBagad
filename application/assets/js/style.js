@@ -1,10 +1,20 @@
-var element = [];
-element = document.querySelectorAll(".event");
-console.log(element);
-for(var i = 0; i<element.count;i++){
-    if(i % 2 == 0){
-        element[i].classList.push("right");
-    }
+
+
+// Get the button that opens the modal
+
+// Get the <span> element that closes the modal
+
+// When the user clicks the button, open the modal 
+function btnClickDelete(id) {
+	console.log('modal-'+id);
+	var modal = document.getElementById('modal-'+id);
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+function Close(id) {
+	var modal = document.getElementById('modal-'+id);
+    modal.style.display = "none";
 }
 
 
