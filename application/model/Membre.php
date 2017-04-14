@@ -5,7 +5,7 @@ class Membre Extends \core\model\Model {
 
     public function getUser($login, $password){
         $data = $this->db->query('SELECT m.idMembre, m.mail, m.nom, m.prenom, m.dateNaissance, m.telephone, m.login, m.motDePasse,
-										i.nom as "instrument", a.rue1 as "rue", l.ville , l.pays, l.codePostale, g.libelle as "groupe" 
+										i.nom as "instrument", a.rue1 as "rue", l.ville , l.pays, l.codePostale, g.libelle 
 								FROM membre m 
 								INNER JOIN instrument i ON m.fk_instrument = i.idInstrument 
 								INNER JOIN adresse a ON m.fk_adresse = a.idAdresse 
