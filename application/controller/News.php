@@ -41,7 +41,7 @@ class News extends \core\controller\Controller
 				$Actualite->idMembre = $_SESSION['users'][0]['idMembre'];
 				$news->insertActu($Actualite);
 			}
-			$this->loadView('addNews', $data);
+			$this->show_news($message = null);
 		}
 		if(isset($_POST['cancel'])){
 			header('Location: index.php?pages=News&module=show_news');
