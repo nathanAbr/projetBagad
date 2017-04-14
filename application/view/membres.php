@@ -30,6 +30,6 @@
     </div>
     <div class="form-group">
         <label for="groupe">Groupe :</label>
-        <input type="text" name="groupe" id="groupe" class="form-control" value="<?php echo $_SESSION['users'][0]['libelle']; ?>"/>
+        <input type="text" name="groupe" id="groupe" class="form-control" value="<?php echo $_SESSION['users'][0]['groupe']; ?>"/>
     </div>
 </div>
